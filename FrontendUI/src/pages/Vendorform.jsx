@@ -107,9 +107,12 @@ const Vendorform = () => {
         </div>
 
         {/* Price Range */}
-        <div className="mb-6">
+       <div className="mb-6">
   <label className="block text-sm font-medium text-gray-700 mb-2">
-    Price Range: <span className="text-yellow-600 font-semibold">₹{formData.maxPrice}</span>
+    Price Range:{" "}
+    <span className="text-pink-500 font-semibold">
+      ₹{parseInt(formData.maxPrice).toLocaleString()}
+    </span>
   </label>
 
   <input
@@ -122,13 +125,45 @@ const Vendorform = () => {
     onChange={(e) =>
       setFormData({ ...formData, maxPrice: e.target.value })
     }
-    className="w-full accent-yellow-500"
+    className="w-full h-3 rounded-lg appearance-none cursor-pointer"
+    style={{
+      background: `linear-gradient(to right, #ec4899 ${
+        (formData.maxPrice / 200000) * 100
+      }%, #e5e7eb ${(formData.maxPrice / 200000) * 100}%)`,
+    }}
   />
 
   {errors.maxPrice && (
     <p className="text-red-500 text-sm mt-1">{errors.maxPrice}</p>
   )}
+
+  {/* Custom slider thumb styling */}
+  <style>
+    {`
+      input[type="range"]::-webkit-slider-thumb {
+        appearance: none;
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        background: linear-gradient(to right, #ec4899, #facc15); /* pink to yellow */
+        border: none;
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        margin-top: -7px;
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        background: linear-gradient(to right, #ec4899, #facc15);
+        border: none;
+        cursor: pointer;
+      }
+    `}
+  </style>
 </div>
+
 
 
         {/* Description */}
